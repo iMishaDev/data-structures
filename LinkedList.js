@@ -15,10 +15,10 @@ class Node {
  * @param {object} nextNode 
  */
 
-    constructor(value, prevNode,nextNode){
+    constructor(value){
         this.value = value;
-        this.prev = prevNode;
-        this.next = nextNode;
+        this.prev = null;
+        this.next = null;
     }
 }
 
@@ -32,7 +32,7 @@ class List {
  */
 
     constructor(node) {
-        this.head = node
+        this.head = null
         this.tail = null
     }
 
@@ -42,9 +42,65 @@ class List {
  */
     insert(value) {
         let temp = this.head;
-        this.head = new Node(value, null, temp)
+        this.head = new Node(value)
         temp.prev = this.head
+        this.head.next = temp
     }
+
+    sortedInsert(value, head=this.head) {
+        let current = head; 
+        let newNode = new Node(value)
+        if(head === null) return this.head = newNode
+        
+        while(current.value < value){
+            if(current.next === null) {
+                current.next = newNode
+                newNode.prev = current
+                return head
+            } else if(current.next.value >= value) {
+                
+                newNode.next = current.next
+                newNode.prev = current
+                
+                current.next.prev = newNode
+                current.next = newNode
+                return head
+            }
+            else current = current.next;
+        } if(current.value > value){
+            current.prev = newNode
+            newNode.next = current
+            this.head = newNode
+        }
+        return head; 
+}
+
+
+reverse(head=this.head) {
+    let current = head
+    let stack = [];
+    let h = []
+
+    while(current !== null ){
+        stack.push(current)
+        current = current.next
+    }
+    while(stack.length){
+        let node = stack.pop()
+        node.next = null
+        node.prev==null
+        if(h.length===0) {
+            h.push(node)
+        } else {
+            h[h.length-1].next = node
+            node.prev = h[h.length-1]
+            h.push(node)
+        }
+    }
+    this.head = h[0]
+
+}
+
 
 /**
  * @delete 
@@ -55,6 +111,7 @@ class List {
         let prev = null;
 
         while(current !== null){
+            console.log(current)
             if(current.value === value){
                 if(current.value === this.head.value){
 
@@ -92,20 +149,42 @@ class List {
  * @tutorial List  
  */
 
-let node1, node2,node3,node4 = null;
-node4 = new Node(4,null,null)
-node3 = new Node(3,null,node4)
-node2 = new Node(2,null,node3)
-node1 = new Node(1,null,node2)
-node4.prev = node3;
-node3.prev = node2;
-node2.prev = node1;
+let list = new List()
 
-let list = new List(node1)
-
-list.delete(3)
-list.insert(50)
-list.insert(100)
+list.sortedInsert(47)
+list.sortedInsert(94)
+list.sortedInsert(3)
+list.sortedInsert(3)
+list.sortedInsert(3)
+list.sortedInsert(3)
+list.sortedInsert(5)
+list.sortedInsert(6)
+list.sortedInsert(10)
+list.sortedInsert(11)
+list.sortedInsert(12)
+list.sortedInsert(12)
+list.sortedInsert(12)
+list.sortedInsert(12)
+list.sortedInsert(14)
+list.sortedInsert(14)
+list.sortedInsert(1)
+list.sortedInsert(2)
+list.sortedInsert(4)
+list.sortedInsert(5)
+list.sortedInsert(20)
+list.sortedInsert(21)
+list.sortedInsert(22)
+list.sortedInsert(22)
+list.sortedInsert(22)
+list.sortedInsert(22)
+list.sortedInsert(54)
+list.sortedInsert(94)
+list.sortedInsert(1111)
+list.sortedInsert(23232)
+list.sortedInsert(23234)
+list.sortedInsert(2323223)
 list.print()
 
+list.reverse()
 
+list.print()
