@@ -79,6 +79,16 @@ class BinarySearchTree {
     }
 
 
+/**
+ * @validBinarySearch check if the given tree is a valid binary tree 
+ * @param {number} low the lowest value a node can have
+ * @param {number} high the highest value a node can have
+ * @param {Node} root the node we're searching through
+ * How to validate ?
+ * 1. check if the current root value in in the range of the given low, high values
+ * 2. check recursively if the left and right children are inside their own scope 
+ * 
+ */
     validBinarySearchTree(low, high, root=this.root){
         if (!root) return true
         return ((root.value < high && root.value > low)
