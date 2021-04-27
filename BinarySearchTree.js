@@ -9,7 +9,7 @@ class Node {
  * @param {Node} rightChild 
  */
 
-    constructor(value, leftChild, rightChild){
+    constructor(value, leftChild=null, rightChild=null){
         this.value = value
         this.leftChild = leftChild
         this.rightChild = rightChild
@@ -77,7 +77,17 @@ class BinarySearchTree {
         if (target > root.value) return this.search(target, root.rightChild)
         if (target < root.value) return this.search(target, root.leftChild)
     }
+
+
+    validBinarySearchTree(low, high, root=this.root){
+        if (!root) return true
+        return ((root.value < high && root.value > low)
+            && this.validBinarySearchTree(low,root.value, root.leftChild)
+            && this.validBinarySearchTree(root.value,high, root.rightChild))
+    }
 }
+
+
 
 /**
  * Tree Example 
@@ -97,3 +107,5 @@ console.log('Preorder Traversal ')
 tree.preorder()
 console.log('Searching for 20 ', tree.search(20))
 console.log('Searching for 1  ', tree.search(1))
+console.log(tree)
+console.log('is Valid BST: ' ,tree.validBinarySearchTree(-10000, 10000))

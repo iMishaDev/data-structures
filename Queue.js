@@ -6,7 +6,8 @@ class Queue {
     }
 
     enqueue(element) {
-        this.queue[this.tail++] = element;
+        this.queue = [...this.queue, element];
+        this.tail = element
     }
 
     size() {
@@ -14,7 +15,7 @@ class Queue {
     }
 
     peek(){
-      return this.queue[this.head];
+        return this.queue[this.head];
     }
 
     dequeue() {
