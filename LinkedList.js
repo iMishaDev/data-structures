@@ -41,10 +41,41 @@ class List {
  * @param {number} value
  */
     insert(value) {
-        let temp = this.head;
-        this.head = new Node(value)
-        temp.prev = this.head
-        this.head.next = temp
+        if(!this.head)
+            this.head = new Node(value)
+        else {
+            let temp = this.head;
+            this.head = new Node(value)
+            temp.prev = this.head
+            this.head.next = temp
+        }
+    }
+
+
+/**
+ * @sumTwoLinkedLists takes  two linked lists head and some each node with the other node from the second list
+ * @param {Node} head1
+ * @param {Node} head2
+ */
+
+    static sumTwoLinkedLists(head1, head2){
+        return this.sumTwoLinkedListsHelper(head1,head2,0)
+    }
+
+    static sumTwoLinkedListsHelper(head1, head2, carry) {
+        let sum = head1.value + head2.value + carry;
+        let newCarry = Math.floor(sum / 10) /** (24/10) => 2.4, floor(2.4) => 2*/
+        let newNode = new Node(Math.floor(sum%10));/** (24%10) => 4 */
+        if(head1.next || head2.next){
+            if(head1.next === null){
+                head1.next = new Node(0);
+            }
+            if(head2.next === null){
+                head2.next = new Node(0)
+            }
+            newNode.next = this.sumTwoLinkedListsHelper(head1.next, head2.next, newCarry)
+        }
+        return newNode;
     }
 
     sortedInsert(value, head=this.head) {
@@ -149,13 +180,20 @@ reverse(head=this.head) {
  * @tutorial List  
  */
 
+let list1 = new List()
+let list2 = new List()
 let list = new List()
 
-list.sortedInsert(47)
-list.sortedInsert(94)
-list.sortedInsert(3)
-list.sortedInsert(3)
-list.sortedInsert(3)
+list1.insert(8)
+list1.insert(5)
+list1.insert(7)
+
+list2.insert(7)
+list2.insert(7)
+list2.insert(7)
+
+console.log('Sum two linked lists : ',List.sumTwoLinkedLists(list1.head, list2.head))
+
 list.sortedInsert(3)
 list.sortedInsert(5)
 list.sortedInsert(6)
