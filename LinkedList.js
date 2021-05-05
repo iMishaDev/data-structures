@@ -31,8 +31,8 @@ class List {
  * @param {Node} node 
  */
 
-    constructor(node) {
-        this.head = null
+    constructor(node = null) {
+        this.head = node
         this.tail = null
     }
 
@@ -51,32 +51,6 @@ class List {
         }
     }
 
-
-/**
- * @sumTwoLinkedLists takes  two linked lists head and some each node with the other node from the second list
- * @param {Node} head1
- * @param {Node} head2
- */
-
-    static sumTwoLinkedLists(head1, head2){
-        return this.sumTwoLinkedListsHelper(head1,head2,0)
-    }
-
-    static sumTwoLinkedListsHelper(head1, head2, carry) {
-        let sum = head1.value + head2.value + carry;
-        let newCarry = Math.floor(sum / 10) /** (24/10) => 2.4, floor(2.4) => 2*/
-        let newNode = new Node(Math.floor(sum%10));/** (24%10) => 4 */
-        if(head1.next || head2.next){
-            if(head1.next === null){
-                head1.next = new Node(0);
-            }
-            if(head2.next === null){
-                head2.next = new Node(0)
-            }
-            newNode.next = this.sumTwoLinkedListsHelper(head1.next, head2.next, newCarry)
-        }
-        return newNode;
-    }
 
     sortedInsert(value, head=this.head) {
         let current = head; 
@@ -104,33 +78,33 @@ class List {
             this.head = newNode
         }
         return head; 
-}
-
-
-reverse(head=this.head) {
-    let current = head
-    let stack = [];
-    let h = []
-
-    while(current !== null ){
-        stack.push(current)
-        current = current.next
     }
-    while(stack.length){
-        let node = stack.pop()
-        node.next = null
-        node.prev==null
-        if(h.length===0) {
-            h.push(node)
-        } else {
-            h[h.length-1].next = node
-            node.prev = h[h.length-1]
-            h.push(node)
+
+
+    reverse(head=this.head) {
+        let current = head
+        let stack = [];
+        let h = []
+
+        while(current !== null ){
+            stack.push(current)
+            current = current.next
         }
-    }
-    this.head = h[0]
+        while(stack.length){
+            let node = stack.pop()
+            node.next = null
+            node.prev==null
+            if(h.length===0) {
+                h.push(node)
+            } else {
+                h[h.length-1].next = node
+                node.prev = h[h.length-1]
+                h.push(node)
+            }
+        }
+        this.head = h[0]
 
-}
+    }
 
 
 /**
@@ -164,6 +138,43 @@ reverse(head=this.head) {
         }
     }
 
+	static sum(head1, head2){
+			return this.#sumHelper(head1, head2, 0)
+	}
+
+	static #sumHelper(head1, head2, carry){
+		let sum = head1.value + head2.value + carry
+        let c = Math.floor(sum/10);
+		let node = new Node(sum%10)
+        if(head1.next || head2.next){
+            if(head1.next === null) head1.next = new Node(0)
+            if(head2.next === null) head2.next = new Node(0)
+            node.next = this.#sumHelper(head1.next, head2.next,c)
+        } else if (carry) node.next = new Node(carry)
+        return node;
+	}
+
+    static iterativeSum(head1, head2){
+        let current1 = head1, current2 = head2, carry = 0, sum = 0, root=null,iterator = root;
+        while(current1 || current2){
+            sum = current1.value + current2.value  + carry;
+            let node = new Node(sum % 10);
+            carry = Math.floor(sum / 10)
+            if(iterator) { iterator.next = node; iterator = iterator.next}
+            else root = iterator = node;
+            if (current1.next || current2.next){
+                if(current1.next === null) current1.next = new Node(0)
+                if(current2.next === null) current2.next = new Node(0)
+            }
+            current1 = current1.next;
+            current2 = current2.next;
+            }
+            if(carry) iterator.next = new Node(carry)
+            return root
+        }
+        
+
+
 
     print() {
         let current = this.head;
@@ -182,47 +193,47 @@ reverse(head=this.head) {
 
 let list1 = new List()
 let list2 = new List()
-let list = new List()
+// let list = new List()
 
-list1.insert(8)
-list1.insert(5)
+list1.insert(7)
+list1.insert(7)
 list1.insert(7)
 
 list2.insert(7)
 list2.insert(7)
 list2.insert(7)
+let l3 = new List(List.iterativeSum(list1.head, list2.head))
+console.log('Sum two linked lists : ',l3.print())
 
-console.log('Sum two linked lists : ',List.sumTwoLinkedLists(list1.head, list2.head))
+// list.sortedInsert(3)
+// list.sortedInsert(5)
+// list.sortedInsert(6)
+// list.sortedInsert(10)
+// list.sortedInsert(11)
+// list.sortedInsert(12)
+// list.sortedInsert(12)
+// list.sortedInsert(12)
+// list.sortedInsert(12)
+// list.sortedInsert(14)
+// list.sortedInsert(14)
+// list.sortedInsert(1)
+// list.sortedInsert(2)
+// list.sortedInsert(4)
+// list.sortedInsert(5)
+// list.sortedInsert(20)
+// list.sortedInsert(21)
+// list.sortedInsert(22)
+// list.sortedInsert(22)
+// list.sortedInsert(22)
+// list.sortedInsert(22)
+// list.sortedInsert(54)
+// list.sortedInsert(94)
+// list.sortedInsert(1111)
+// list.sortedInsert(23232)
+// list.sortedInsert(23234)
+// list.sortedInsert(2323223)
+// list.print()
 
-list.sortedInsert(3)
-list.sortedInsert(5)
-list.sortedInsert(6)
-list.sortedInsert(10)
-list.sortedInsert(11)
-list.sortedInsert(12)
-list.sortedInsert(12)
-list.sortedInsert(12)
-list.sortedInsert(12)
-list.sortedInsert(14)
-list.sortedInsert(14)
-list.sortedInsert(1)
-list.sortedInsert(2)
-list.sortedInsert(4)
-list.sortedInsert(5)
-list.sortedInsert(20)
-list.sortedInsert(21)
-list.sortedInsert(22)
-list.sortedInsert(22)
-list.sortedInsert(22)
-list.sortedInsert(22)
-list.sortedInsert(54)
-list.sortedInsert(94)
-list.sortedInsert(1111)
-list.sortedInsert(23232)
-list.sortedInsert(23234)
-list.sortedInsert(2323223)
-list.print()
+// list.reverse()
 
-list.reverse()
-
-list.print()
+// list.print()
