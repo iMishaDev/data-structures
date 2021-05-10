@@ -41,13 +41,13 @@ class List {
  * @param {number} value
  */
     insert(value) {
-        if(!this.head)
-            this.head = new Node(value)
-        else {
-            let temp = this.head;
-            this.head = new Node(value)
-            temp.prev = this.head
-            this.head.next = temp
+        let node = new Node(value)
+        if (!this.head){
+            this.head = node;
+            this.tail = node
+        } else { 
+            this.tail.next = node
+            this.tail = node
         }
     }
 
@@ -104,6 +104,17 @@ class List {
         }
         this.head = h[0]
 
+    }
+
+    static reverswithConstantSpace(head){
+        let prev = null, current = head, temp = null
+        while(current){
+            temp = current.next;
+            current.next = prev
+            prev = current
+            current = temp
+        }
+        return prev
     }
 
 
@@ -174,10 +185,8 @@ class List {
         }
         
 
-
-
-    print() {
-        let current = this.head;
+    print(head) {
+        let current = head;
 
         while(current !== null){
             console.log(current.value)
@@ -195,15 +204,20 @@ let list1 = new List()
 let list2 = new List()
 // let list = new List()
 
+list1.insert(5)
+list1.insert(6)
 list1.insert(7)
-list1.insert(7)
-list1.insert(7)
+list1.insert(8)
+// list2.insert(7)
+// list2.insert(7)
+// list2.insert(7)
+// let l3 = new List(List.iterativeSum(list1.head, list2.head))
+// console.log('Sum two linked lists : ',l3.print())
+let input = [[7, 0], [4, 4], [7, 1], [5, 0], [6, 1], [5, 2]]
+let x = [1,2,3,5,2,1,3,5,4]
 
-list2.insert(7)
-list2.insert(7)
-list2.insert(7)
-let l3 = new List(List.iterativeSum(list1.head, list2.head))
-console.log('Sum two linked lists : ',l3.print())
+
+console.log('Sum   : ', List.reverswithConstantSpace(list1.head))
 
 // list.sortedInsert(3)
 // list.sortedInsert(5)
