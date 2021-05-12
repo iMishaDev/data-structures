@@ -79,8 +79,8 @@ class Heap {
 
         while(this.hasLeftChild(index)){
             smallest = this.getLeftChildIndex(index);
-            if(this.hasRightChild(index) && this.getRightChild(index) < smallest){
-                smallest = this.getRightChildIndex
+            if(this.hasRightChild(index) && this.getRightChild(index) < this.getLeftChild(smallest)){
+                smallest = this.getRightChildIndex(index)
             }
             if(this.heap[index] < this.heap[smallest]) return
             else {
