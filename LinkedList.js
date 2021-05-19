@@ -183,6 +183,24 @@ class List {
             if(carry) iterator.next = new Node(carry)
             return root
         }
+
+        isPalindrome(head=this.head){
+            let current = head, stack = [], isPalindrome = true;
+            while(current){
+                stack.push(current.value)
+                current = current.next
+            }
+
+            current = head
+            while(current){
+                if (stack.pop() !== current.value){
+                    isPalindrome = false;
+                    break;
+                }
+                current = current.next
+            }
+            return isPalindrome;
+        }
         
 
     print(head) {
@@ -204,20 +222,22 @@ let list1 = new List()
 let list2 = new List()
 // let list = new List()
 
-list1.insert(5)
-list1.insert(6)
-list1.insert(7)
-list1.insert(8)
+list1.insert(1)
+list1.insert(2)
+list1.insert(2)
+list1.insert(1)
+
+console.log('isPalidrome', list1.isPalindrome())
 // list2.insert(7)
 // list2.insert(7)
 // list2.insert(7)
 // let l3 = new List(List.iterativeSum(list1.head, list2.head))
 // console.log('Sum two linked lists : ',l3.print())
-let input = [[7, 0], [4, 4], [7, 1], [5, 0], [6, 1], [5, 2]]
-let x = [1,2,3,5,2,1,3,5,4]
+// let input = [[7, 0], [4, 4], [7, 1], [5, 0], [6, 1], [5, 2]]
+// let x = [1,2,3,5,2,1,3,5,4]
 
 
-console.log('Sum   : ', List.reverswithConstantSpace(list1.head))
+// console.log('Sum   : ', List.reverswithConstantSpace(list1.head))
 
 // list.sortedInsert(3)
 // list.sortedInsert(5)
