@@ -201,7 +201,25 @@ class List {
             }
             return isPalindrome;
         }
-        
+    
+    removeKthElement(k){
+        let behind = this.head, forward = this.head, prev = this.head
+
+        while(k-1){
+            forward = forward.next
+            k--;
+        }
+        console.log(forward)
+
+        while(forward){
+            prev = behind
+            forward = forward.next
+            behind = behind.next
+        }
+        prev.next = behind.next
+
+        return this.head
+    }
 
     print(head) {
         let current = head;
@@ -224,10 +242,10 @@ let list2 = new List()
 
 list1.insert(1)
 list1.insert(2)
-list1.insert(2)
-list1.insert(1)
+list1.insert(3)
+list1.insert(4)
 
-console.log('isPalidrome', list1.isPalindrome())
+console.log('removeKthElement', list1.removeKthElement(3))
 // list2.insert(7)
 // list2.insert(7)
 // list2.insert(7)
