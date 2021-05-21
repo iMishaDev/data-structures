@@ -35,6 +35,24 @@ class Stack {
         return this.head === -1;
     }
 
+    hasValidParentheses(text){
+        let textArray = text.split('');
+        let parantheses = {
+            '[' : ']',
+            '(' : ')',
+            '{' : '}'
+        }
+
+        textArray.forEach((element) => {
+            if(parantheses[this.peek()] === element)
+                this.pop()
+            else this.push(element)
+        })
+        
+        return this.isEmpty()
+    }
+
+
     search(target) {
         for (let x = 0; x<this.head; x++){
             if (this.stack[x] === target) return x
@@ -60,4 +78,4 @@ let stack = new Stack([]);
 // console.log('max', stack.max())
 // console.log(stack)
 
-console.log(Stack.productExceptSelf([1, 2, 3, 4]))
+console.log(stack.hasValidParentheses('()[{}]'))
