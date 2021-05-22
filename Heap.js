@@ -90,13 +90,21 @@ class Heap {
             }
         }
     }
+
+    findTheHighestKthElement(k){
+        let highest = this.heap
+        while(k-1){
+            highest = this.poll()
+        }
+        return highest
+    }
 }
 
 let heap = new Heap([]);
 console.log('add 100 ', heap.add(100))
 console.log('add 10 ', heap.add(10))
 console.log('add 9', heap.add(9))
-console.log('poll ', heap.poll())
+// console.log('poll ', heap.poll())
 console.log('add 1 ', heap.add(1))
-console.log('peek', heap.peek())
+console.log('highest', heap.findTheHighestKthElement(3))
 console.log(heap)
