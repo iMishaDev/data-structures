@@ -127,7 +127,6 @@ class List {
         let prev = null;
 
         while(current !== null){
-            console.log(current)
             if(current.value === value){
                 if(current.value === this.head.value){
 
@@ -221,31 +220,31 @@ class List {
         return this.head
     }
 
-    print(head) {
-        let current = head;
+    print() {
+        let current = this.head;
 
-        while(current !== null){
+        while(current){
             console.log(current.value)
             current = current.next;
         }
     }
 }
-
+module.exports = List
 
 /**
  * @tutorial List  
  */
 
-let list1 = new List()
-let list2 = new List()
+// let list1 = new List()
+// let list2 = new List()
 // let list = new List()
 
-list1.insert(1)
-list1.insert(2)
-list1.insert(3)
-list1.insert(4)
+// list1.insert(1)
+// list1.insert(2)
+// list1.insert(3)
+// list1.insert(4)
 
-console.log('removeKthElement', list1.removeKthElement(3))
+// console.log('removeKthElement', list1.removeKthElement(3))
 // list2.insert(7)
 // list2.insert(7)
 // list2.insert(7)
