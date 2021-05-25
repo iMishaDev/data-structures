@@ -1,42 +1,53 @@
+const List = require('./LinkedList')
 class HashTable {
-    constructor(){
+    constructor(size){
         this.hashTable = {}
+        this.size = size
+        for(let i = 0; i < size; i++){
+            this.hashTable[i] = new List()
+        }
     }
 
-    #hashFunction(element){
-        return Math.floor(element*3/2)
+
+
+    #hash(element){
+        let key = 0;
+        element.split('').map((letter) => {
+            key += letter.charCodeAt(0)
+        })
+
+        return key % this.size
     }
 
     add(element){
-        let elementIndex = this.#hashFunction(element)
-        if(this.hashTable[elementIndex])
-            this.hashTable[elementIndex].push(element)
-        else this.hashTable[elementIndex] = [element]
+        let elementIndex = this.#hash(element)
+        this.hashTable[elementIndex].insert(element)
         return  this.hashTable[elementIndex]
     }
 
     delete(element){
-        let elementIndex = this.#hashFunction(element)
-        let deletedIndex =  this.hashTable[elementIndex].indexOf(element)
-        this.hashTable[elementIndex].splice(deletedIndex)
+        let elementIndex = this.#hash(element)
+        console.log(elementIndex)
+        this.hashTable[elementIndex].delete(element)
         return this.hashTable
     }
 
     find(element){
-        return this.#hashFunction(element)
+        return this.#hash(element)
     }
 
     print(){
-
+        for(let i = 0; i < this.size; i++){
+            console.log(i, this.hashTable[i].print())
+        }
     }
 }
 
-let hashTable = new HashTable();
-console.log('add 100 ', hashTable.add(100))
-console.log('add 10 ', hashTable.add(10))
-console.log('add 9', hashTable.add(9))
-console.log('add 9', hashTable.add(9))
-console.log(hashTable)
-console.log('find 9', hashTable.find(9))
-console.log('delete 9', hashTable.delete(9))
-console.log(hashTable)
+let hashTable = new HashTable(10);
+hashTable.add('Mashael')
+hashTable.add('Misha')
+hashTable.add('Mish')
+hashTable.add('Mi')
+console.log('find Misha', hashTable.find('Misha'))
+console.log('delete Misha', hashTable.delete('Misha'))
+hashTable.print()
