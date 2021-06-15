@@ -44,12 +44,6 @@ class Heap {
         return this.heap[0]
     }
 
-    #swap(element1, element2){
-        let temp = element1
-        element1 = element2
-        element2 = temp
-        return [ element1, element2 ]
-    }
     add(element){
         this.heap[this.heap.length] = element
         this.#heapifyUp()
@@ -68,7 +62,7 @@ class Heap {
 
         while(this.hasParent(index) && this.getParent(index) > this.heap[index]){
             [this.heap[this.getParentIndex(index)], this.heap[index]] =
-            this.#swap(this.heap[this.getParentIndex(index)], this.heap[index])
+            [this.heap[index], this.heap[this.getParentIndex(index)]]
             index = this.getParentIndex(index)
         }
     }
@@ -85,7 +79,7 @@ class Heap {
             if(this.heap[index] < this.heap[smallest]) return
             else {
                 [this.heap[smallest], this.heap[index]] =
-                this.#swap(this.heap[smallest], this.heap[index])
+                [this.heap[index], this.heap[smallest]]
                 index = smallest
             }
         }
