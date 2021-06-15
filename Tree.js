@@ -17,7 +17,7 @@ class Node {
  * @param {Array} children 
  */
 
-    constructor(value, children){
+    constructor(value, children=[]){
         this.value = value
         this.children = children
     }
@@ -61,7 +61,23 @@ class Tree {
         })
     }
 
+    
+    dfsIterator(){
+        this.#dfsHelper(this.root)
+    }
 
+    #dfsHelper(root){
+        let stack = []
+        const isNotEmpty = () => (stack.length);
+        
+        stack.push(root)
+        while(isNotEmpty()){
+            let node = stack.pop()
+            console.log(node)
+
+            stack = [...stack, ...node.children]
+        }
+    }
 /**
  * @bfs Breadth-first search
  * @param {Node} root with initial value
@@ -109,18 +125,23 @@ class Tree {
  * 3. Traverse the right subtree, i.e., call Inorder(right-subtree)
  */
     inorder(root=this.root){
-        for(let i=0; i<root.children.length - 1; i++)
+        for(let i=0; i<root.children.length; i++)
             this.inorder(root.children[i])
         console.log(root.value)
         
-        if (root.children.length > 0) this.inorder(root.children[root.children.length-1])
+        // if (root.children.length > 0) this.inorder(root.children[root.children.length-1])
     }
 
 
 /**
  * @postorder Postorder Tree Traversal 
  * @param {Node} root with initial value
- * Algorithm Postorder(tree)
+ * Algorithm Postorder(tree)"{
+ * 
+ * 
+ * 
+ * 
+ * "
  * 1. Traverse the left subtree, i.e., call Postorder(left-subtree)
  * 2. Traverse the right subtree, i.e., call Postorder(right-subtree)
  * 3. Visit the root.
@@ -147,7 +168,9 @@ let tree = new Tree(new Node('A',
                     new Node('C', [new Node('F',[]),new Node('G', [])])]));
 console.log('Tree :',tree)
 console.log('Tree Height: ',tree.height())
-console.log('Depth First Search')
+console.log('Depth First Search Iteration Version')
+tree.dfsIterator()
+console.log('Depth First Search Recursive Version')
 tree.dfs()
 console.log('Breadth First Search')
 tree.bfs()
