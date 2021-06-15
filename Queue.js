@@ -19,11 +19,8 @@ class Queue {
     }
 
     dequeue() {
-    if (this.tail === this.head)
-        return undefined
 
-    let element = this.queue[this.head];
-    delete this.queue[this.head];
+    let element = this.queue.shift();
     this.head +=1;
     return element;
     }
