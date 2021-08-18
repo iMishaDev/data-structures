@@ -86,9 +86,11 @@ class Heap {
     }
 
     findTheHighestKthElement(k){
-        let highest = this.heap
+        let highest = [this.poll()]
+
         while(k-1){
-            highest = this.poll()
+            highest = [...highest, this.poll()]
+            k--;
         }
         return highest
     }
