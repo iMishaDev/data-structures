@@ -22,11 +22,14 @@ class BinarySearchArray {
  */
 
     search(target, low=0, high=this.list.length-1, data=this.list){
+        if(high < low)
+            return -1;
+        
         let mid =  Math.floor((high + low) / 2)
-        if(target === data[mid]) return mid
-        if(target > data[mid]) return this.search(target,mid, data.length+1)
-        if(target < data[mid]) return this.search(target, 0, mid)
-        return null
+
+        if(target === data[mid]) return mid;
+        else if(target < data[mid]) return this.search(target, 0, mid)
+        else return this.search(target, mid + 1, data.length - 1)
     }
 }
 
