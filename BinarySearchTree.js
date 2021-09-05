@@ -40,9 +40,11 @@ class BinarySearchTree {
  */
 
     preorder(root=this.root){
+        if(!root)
+            return;
         console.log(root.value)
-        if (root.leftChild) this.preorder(root.leftChild)
-        if (root.rightChild) this.preorder(root.rightChild)
+        this.preorder(root.leftChild)
+        this.preorder(root.rightChild)
     }
 
 
@@ -56,9 +58,11 @@ class BinarySearchTree {
  */
 
     inorder(root=this.root){
-        if (root.leftChild) this.inorder(root.leftChild)
+        if(!root)
+            return;
+        this.inorder(root.leftChild)
         console.log(root.value)
-        if (root.rightChild) this.inorder(root.rightChild)
+        this.inorder(root.rightChild)
     }
 
 /**
@@ -72,7 +76,8 @@ class BinarySearchTree {
  */
 
     search(target, root=this.root){
-        if (root === null) return null
+        if(!root)
+            return null;
         if (target === root.value) return root
         if (target > root.value) return this.search(target, root.rightChild)
         if (target < root.value) return this.search(target, root.leftChild)
@@ -90,7 +95,8 @@ class BinarySearchTree {
  * 
  */
     validBinarySearchTree(low, high, root=this.root){
-        if (!root) return true
+        if (!root) 
+            return true
         return ((root.value < high && root.value > low)
             && this.validBinarySearchTree(low,root.value, root.leftChild)
             && this.validBinarySearchTree(root.value,high, root.rightChild))
