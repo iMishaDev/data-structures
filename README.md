@@ -11,4 +11,4 @@ Here's the list of the data structures i will be working on:
 - [x] HashTable
 - [x] Binary Search Tree
 - [x] Binary Search Using Array
-- [ ] Graph
+- [x] Graph
