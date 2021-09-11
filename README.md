@@ -4,7 +4,7 @@ This Repository will contain my own implmentation of the data strucures using `j
 
 Here's the list of the data structures i will be working on:
 - [x] Linked List 
-- [ ] Array
+- [x] Array
 - [x] Stack
 - [x] Queue
 - [x] Heap
