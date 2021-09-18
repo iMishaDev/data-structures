@@ -30,9 +30,10 @@ class List {
  * @param {Node} node 
  */
 
-    constructor(node = null) {
-        this.head = node
-        this.tail = node
+    constructor() {
+        this.head = null;
+        this.tail = null;
+        this.length = 0;
     }
 
 /**
@@ -48,6 +49,7 @@ class List {
             this.tail.next = node
             this.tail = node
         }
+        this.length += 1;
     }
 
 
@@ -64,6 +66,7 @@ class List {
             node.next = this.head;
             this.head = node;
         }
+        this.length += 1;
     }
 
     sortedInsert(value, head=this.head) {
@@ -163,6 +166,7 @@ class List {
         let node = this.head.next;
         this.head.next = null;
         this.head = node;
+        this.length -= 1;
     }
 
     deleteLast(){
@@ -173,6 +177,7 @@ class List {
         }
         this.tail = current;
         current.next = null;
+        this.length -= 1;
     }
 /**
  * @delete 
@@ -193,6 +198,8 @@ class List {
                     current = current.next;
                     current.prev = prev;
                     }
+
+                this.length -= 1;
             } else {
                     prev = current;
                     current = current.next;
@@ -202,60 +209,30 @@ class List {
                 return this.head;
             }
         }
+        
     }
 
-	static sum(head1, head2){
-			return this.#sumHelper(head1, head2, 0)
-	}
+    size(){
+        return this.length;
+    }
 
-	static #sumHelper(head1, head2, carry){
-		let sum = head1.value + head2.value + carry
-        let c = Math.floor(sum/10);
-		let node = new Node(sum%10)
-        if(head1.next || head2.next){
-            if(head1.next === null) head1.next = new Node(0)
-            if(head2.next === null) head2.next = new Node(0)
-            node.next = this.#sumHelper(head1.next, head2.next,c)
-        } else if (carry) node.next = new Node(carry)
-        return node;
-	}
-
-    static iterativeSum(head1, head2){
-        let current1 = head1, current2 = head2, carry = 0, sum = 0, root=null,iterator = root;
-        while(current1 || current2){
-            sum = current1.value + current2.value  + carry;
-            let node = new Node(sum % 10);
-            carry = Math.floor(sum / 10)
-            if(iterator) { iterator.next = node; iterator = iterator.next}
-            else root = iterator = node;
-            if (current1.next || current2.next){
-                if(current1.next === null) current1.next = new Node(0)
-                if(current2.next === null) current2.next = new Node(0)
-            }
-            current1 = current1.next;
-            current2 = current2.next;
-            }
-            if(carry) iterator.next = new Node(carry)
-            return root
+    isPalindrome(head=this.head){
+        let current = head, stack = [], isPalindrome = true;
+        while(current){
+            stack.push(current.value)
+            current = current.next
         }
 
-        isPalindrome(head=this.head){
-            let current = head, stack = [], isPalindrome = true;
-            while(current){
-                stack.push(current.value)
-                current = current.next
+        current = head
+        while(current){
+            if (stack.pop() !== current.value){
+                isPalindrome = false;
+                break;
             }
-
-            current = head
-            while(current){
-                if (stack.pop() !== current.value){
-                    isPalindrome = false;
-                    break;
-                }
-                current = current.next
-            }
-            return isPalindrome;
+            current = current.next
         }
+        return isPalindrome;
+    }
     
     removeKthElement(k){
         let behind = this.head, forward = this.head, prev = this.head
@@ -299,6 +276,7 @@ list1.insertLast(1)
 list1.insertLast(2)
 list1.insertLast(3)
 list1.insertLast(4)
+console.log(list1.size());
 
 console.log(list1.contains(3));
 console.log(list1.indexOf(3));
@@ -312,6 +290,7 @@ console.log(list1);
 list1.deleteFirst();
 console.log(list1);
 
+console.log(list1.size());
 
 // console.log('removeKthElement', list1.removeKthElement(3))
 // list2.insert(7)
