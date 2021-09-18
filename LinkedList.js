@@ -147,6 +147,17 @@ class List {
     }
 
 
+    contains(element){
+        let current = this.head;
+
+        while(current !== null){
+            if(current.value === element)
+                return true;
+            current = current.next;
+        }
+
+        return false;
+    }
 
 /**
  * @delete 
