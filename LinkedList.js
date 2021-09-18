@@ -98,31 +98,6 @@ class List {
     }
 
 
-    reverse(head=this.head) {
-        let current = head
-        let stack = [];
-        let h = []
-
-        while(current !== null ){
-            stack.push(current)
-            current = current.next
-        }
-        while(stack.length){
-            let node = stack.pop()
-            node.next = null
-            node.prev==null
-            if(h.length===0) {
-                h.push(node)
-            } else {
-                h[h.length-1].next = node
-                node.prev = h[h.length-1]
-                h.push(node)
-            }
-        }
-        this.head = h[0]
-
-    }
-
     static reverswithConstantSpace(head){
         let prev = null, current = head, temp = null
         while(current){
@@ -134,6 +109,30 @@ class List {
         return prev
     }
 
+
+
+
+    reverse(){
+        let stack = [];
+        let current = this.head;
+
+        while(current){
+            stack.push(current);
+            current = current.next;
+        }
+
+        let newHead = stack.pop();
+        current = newHead;
+        while(stack.length){
+            let node = stack.pop();
+            current.next = node;
+            current = current.next;
+        }
+        current.next = null;
+
+        this.head = newHead;
+        this.tail = current;
+    }
 
     indexOf(value){
         let current = this.head;
@@ -257,7 +256,7 @@ class List {
         let array = [];
         let current = this.head;
 
-        while(current !== null){
+        while(current){
             array.push(current.value);
             current = current.next;
         }
@@ -288,6 +287,8 @@ list1.insertLast(1)
 list1.insertLast(2)
 list1.insertLast(3)
 list1.insertLast(4)
+
+console.log(list1.reverse())
 console.log(list1.size());
 console.log(list1.toArray());
 console.log(list1.contains(3));
