@@ -132,6 +132,22 @@ class List {
     }
 
 
+    indexOf(value){
+        let current = this.head;
+        let i = 0;
+
+        while(current !== null){
+            if(current.value === value)
+                return i;
+            i +=1;
+            current = current.next;
+        }
+
+        return -1;
+    }
+
+
+
 /**
  * @delete 
  * @param {number} value 
