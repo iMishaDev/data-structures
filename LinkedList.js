@@ -253,6 +253,18 @@ class List {
         return this.head
     }
 
+    toArray(){
+        let array = [];
+        let current = this.head;
+
+        while(current !== null){
+            array.push(current.value);
+            current = current.next;
+        }
+
+        return array;
+    }
+
     print() {
         let current = this.head;
 
@@ -277,7 +289,7 @@ list1.insertLast(2)
 list1.insertLast(3)
 list1.insertLast(4)
 console.log(list1.size());
-
+console.log(list1.toArray());
 console.log(list1.contains(3));
 console.log(list1.indexOf(3));
 
