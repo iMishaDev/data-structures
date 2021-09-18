@@ -159,6 +159,21 @@ class List {
         return false;
     }
 
+    deleteFirst(){
+        let node = this.head.next;
+        this.head.next = null;
+        this.head = node;
+    }
+
+    deleteLast(){
+        let current = this.head;
+
+        while(current.next.next){
+            current = current.next;
+        }
+        this.tail = current;
+        current.next = null;
+    }
 /**
  * @delete 
  * @param {number} value 
