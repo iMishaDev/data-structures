@@ -22,7 +22,7 @@ class Node {
 }
 
 
-class List {
+export class LinkedList {
 
 
 /**
@@ -98,7 +98,7 @@ class List {
     }
 
 
-    static reverswithConstantSpace(head){
+    static reversWithConstantSpace(head){
         let prev = null, current = head, temp = null
         while(current){
             temp = current.next;
@@ -108,7 +108,6 @@ class List {
         }
         return prev
     }
-
 
 
 
@@ -232,6 +231,30 @@ class List {
         }
         return isPalindrome;
     }
+
+    removeKth(k){
+        let current = this.head;
+        let toBeDeleted = this.head;
+        let prev = toBeDeleted;
+
+        while(k){
+            current = current.next;
+            k -= 1;
+        }
+
+        while(current){
+            prev = toBeDeleted;
+            toBeDeleted = toBeDeleted.next;
+            current = current.next;
+        }
+
+        prev.next = toBeDeleted.next;
+        toBeDeleted.next = null;
+
+        return this.head;
+
+    }
+
     
     removeKthElement(k){
         let behind = this.head, forward = this.head, prev = this.head
@@ -276,34 +299,36 @@ class List {
 // module.exports = List
 
 /**
- * @tutorial List  
+ * @tutorial LinkedList  
  */
 
-let list1 = new List()
-// let list2 = new List()
-// let list = new List()
+// let list1 = new LinkedList()
+// let list2 = new LinkedList()
+// let list = new LinkedList()
 
-list1.insertLast(1)
-list1.insertLast(2)
-list1.insertLast(3)
-list1.insertLast(4)
+// list1.insertLast(1)
+// list1.insertLast(2)
+// list1.insertLast(3)
+// list1.insertLast(4)
 
-console.log(list1.reverse())
-console.log(list1.size());
-console.log(list1.toArray());
-console.log(list1.contains(3));
-console.log(list1.indexOf(3));
+// console.log(list1.reverse())
+// console.log(list1.size());
+// console.log(list1.toArray());
+// console.log(list1.contains(3));
+// console.log(list1.indexOf(3));
 
-list1.insertFirst(5);
-console.log(list1);
+// list1.insertFirst(5);
+// console.log(list1);
 
-list1.deleteLast();
-console.log(list1);
+// list1.deleteLast();
+// console.log(list1);
 
-list1.deleteFirst();
-console.log(list1);
+// list1.deleteFirst();
+// console.log(list1);
 
-console.log(list1.size());
+// console.log(list1.size());
+
+// console.log(list1.reversWithConstantSpace());
 
 // console.log('removeKthElement', list1.removeKthElement(3))
 // list2.insert(7)
@@ -315,7 +340,6 @@ console.log(list1.size());
 // let x = [1,2,3,5,2,1,3,5,4]
 
 
-// console.log('Sum   : ', List.reverswithConstantSpace(list1.head))
 
 // list.sortedInsert(3)
 // list.sortedInsert(5)
