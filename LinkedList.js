@@ -17,7 +17,6 @@ class Node {
 
     constructor(value){
         this.value = value;
-        this.prev = null;
         this.next = null;
     }
 }
@@ -33,15 +32,15 @@ class List {
 
     constructor(node = null) {
         this.head = node
-        this.tail = null
+        this.tail = node
     }
 
 /**
- * @insert 
+ * @insertLast
  * @param {number} value
  */
-    insert(value) {
-        let node = new Node(value)
+    insertLast(value) {
+        let node = new Node(value);
         if (!this.head){
             this.head = node;
             this.tail = node
@@ -51,6 +50,21 @@ class List {
         }
     }
 
+
+/**
+ * @insertFirst
+ * @param {number} value
+ */
+    insertFirst(value) {
+        let node = new Node(value);
+        if (!this.head){
+            this.head = node;
+            this.tail = node
+        } else { 
+            node.next = this.head;
+            this.head = node;
+        }
+    }
 
     sortedInsert(value, head=this.head) {
         let current = head; 
@@ -229,20 +243,33 @@ class List {
         }
     }
 }
-module.exports = List
+// module.exports = List
 
 /**
  * @tutorial List  
  */
 
-// let list1 = new List()
+let list1 = new List()
 // let list2 = new List()
 // let list = new List()
 
-// list1.insert(1)
-// list1.insert(2)
-// list1.insert(3)
-// list1.insert(4)
+list1.insertLast(1)
+list1.insertLast(2)
+list1.insertLast(3)
+list1.insertLast(4)
+
+console.log(list1.contains(3));
+console.log(list1.indexOf(3));
+
+list1.insertFirst(5);
+console.log(list1);
+
+list1.deleteLast();
+console.log(list1);
+
+list1.deleteFirst();
+console.log(list1);
+
 
 // console.log('removeKthElement', list1.removeKthElement(3))
 // list2.insert(7)
