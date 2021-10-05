@@ -1,4 +1,5 @@
-const List = require('./LinkedList')
+import { List } from './../../LinkedList/LinkedList.js'
+
 class HashTable {
     constructor(size){
         this.hashTable = {}
