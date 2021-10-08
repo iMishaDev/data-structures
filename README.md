@@ -1,14 +1,66 @@
 # Data Structures
 
-This Repository will contain my own implmentation of the data strucures using `javascript`. 
+This Repository will contain my own implementation of the data structures using `Javascript`. 
 
 Here's the list of the data structures i will be working on:
 - [x] Linked List 
+    - insertLast
+    - insertFirst
+    - sortedInsert
+    - reversWithConstantSpace
+    - reverse
+    - indexOf
+    - contains
+    - deleteFirst
+    - deleteLast
+    - delete
+    - size
+    - isPalindrome
+    - removeKth
+    - removeKthElement
+    - toArray
+    - printMiddle
+    - printMiddleV2
+    - hasLoop
+    - hasLoopV2
+    - print
 - [x] Array
+    - insert
+    - removeAt
+    - indexOf
+    - max
+    - intersect
+    - reverse
+    - reverse1
+    - insertAt
+    - print
 - [x] Stack
 - [x] Queue
 - [x] Heap
 - [x] HashTable
+    - HashTableUsingLinkedList
+        - #hash
+        - add
+        - delete
+        - find
+        - print
+    - HashTableUsingArray
+        - #hash
+        - set
+        - get
+        - remove
 - [x] Binary Search Tree
 - [x] Binary Search Using Array
 - [x] Graph
+    - GraphUsingAdjacencyList
+        - addVertex
+        - addEdge
+        - bfs
+        - bfs_rec
+        - #bfs_helper
+        - dfs
+        - dfs_rec
+        - #dfs_helper
+        - print
+    - GraphUsingAdjacencyMatrix
+    - GraphUsingObjectsPointers
