@@ -126,6 +126,25 @@ class BinarySearchTree {
     }
 
     isPerfectBinaryTree(root){
+        return this.#isPerfectBinaryTreeHelper(root, this.#calculateDepth(root), 0);
+    }
+
+    #calculateDepth(root){
+        if(!root) return 0;
+        return 1 + this.#calculateDepth(root.leftChild);
+    }
+
+
+    #isPerfectBinaryTreeHelper(root, depth, height){
+        if(!root) return height;
+        
+        if(!root.leftChild && !root.rightChild)
+            return depth === height;
+        
+        if(!root.leftChild || !root.rightChild)
+            return false;
+
+        return this.#isPerfectBinaryTreeHelper(root.leftChild) && this.#isPerfectBinaryTreeHelper(root.rightChild)
     }
 }
 
@@ -141,17 +160,26 @@ class BinarySearchTree {
  */ 
 
 let tree = new BinarySearchTree(new Node(10,
-                    new Node(5, new Node(4,null), new Node(8, null)),
-                    new Node(20, new Node(18,null),new Node(24, null))));
+                    new Node(5, new Node(4), new Node(8)),
+                    new Node(20, new Node(18),new Node(24))));
+let tree2 = new BinarySearchTree(new Node(10,
+                    new Node(5, 
+                        new Node(4),
+                        new Node(8)),
+                    new Node(20, 
+                        new Node(18,
+                            new Node(17),
+                            new Node(19)),
+                    new Node(24 ))));
 
-
-console.log('Inorder Traversal ')
-tree.inorder()
-console.log('Preorder Traversal ')
-tree.preorder()
-console.log('Searching for 20 ', tree.search(20))
-console.log('Searching for 1  ', tree.search(1))
-console.log(tree)
+// console.log('Inorder Traversal ')
+// tree.inorder()
+// console.log('Preorder Traversal ')
+// tree.preorder()
+// console.log('Searching for 20 ', tree.search(20))
+// console.log('Searching for 1  ', tree.search(1))
+// console.log(tree)
 // console.log('is Valid BST: ' ,tree.validBinarySearchTree(-10000, 10000))
 
 console.log('isFullBinaryTree', tree.isFullBinaryTree(tree))
+console.log('isPerfectBinaryTree', tree.isPerfectBinaryTree(tree2))
