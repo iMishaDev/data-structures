@@ -81,6 +81,10 @@ Here's the list of the data structures i will be working on:
         - isCompleteBinaryTree
         - isBalancedBinaryTree
         - isPerfectBinaryTree
+        - preorder
+        - inorder
+        - search
+
 - [x] Graph
     - GraphUsingAdjacencyList
         - addVertex
