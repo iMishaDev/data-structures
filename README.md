@@ -74,7 +74,13 @@ Here's the list of the data structures i will be working on:
         - get
         - remove
 - [x] Binary Search Tree
-- [x] Binary Search Using Array
+    - Binary Search Using Array
+        - search
+    - Binary Search Tree 
+        - isFullBinaryTree
+        - isCompleteBinaryTree
+        - isBalancedBinaryTree
+        - isPerfectBinaryTree
 - [x] Graph
     - GraphUsingAdjacencyList
         - addVertex
