@@ -36,6 +36,30 @@ Here's the list of the data structures i will be working on:
     - print
 - [x] Stack
 - [x] Queue
+    - Regular Queue
+        - enqueue
+        - size
+        - peek
+        - dequeue
+    - Circular Queue
+        - enqueue
+        - size
+        - peek
+        - dequeue
+    - Priority Queue
+        - #hasParent
+        - #hasLeftChild
+        - #hasRightChild
+        - #getParent
+        - #getParentIndex
+        - #getLeftChildIndex
+        - #getRightChildIndex
+        - #getLeftChild
+        - #getRightChild
+        - #heapify_up
+        - #heapify_down
+        - enqueue
+        - dequeue
 - [x] Heap
 - [x] HashTable
     - HashTableUsingLinkedList
