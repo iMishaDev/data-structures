@@ -116,12 +116,16 @@ class BinarySearchTree {
     }
 
 
-    isCompleteBinaryTree(){
+    isCompleteBinaryTree(root){
+        if(!root) return [true, 0];
+        const [leftBool, leftHeight] = this.isCompleteBinaryTree(root.leftChild);
+        const [rightBool, rightHeight] = this.isCompleteBinaryTree(root.rightChild);
         
+        return [leftBool && rightBool && leftHeight >= rightHeight, Math.max(leftHeight, rightHeight) + 1];
     }
 
 
-    isBalancedBinaryTree(){
+    isBalancedBinaryTree(root){
         
     }
 
@@ -172,6 +176,18 @@ let tree2 = new BinarySearchTree(new Node(10,
                             new Node(19)),
                     new Node(24 ))));
 
+
+let tree3 = new BinarySearchTree(new Node(10,
+                    new Node(5, 
+                        new Node(18),
+                        new Node(24)),
+                    new Node(20)));
+
+let tree4 = new BinarySearchTree(new Node(10,
+                    new Node(5),
+                    new Node(20, 
+                        new Node(18),
+                        new Node(24))));
 // console.log('Inorder Traversal ')
 // tree.inorder()
 // console.log('Preorder Traversal ')
@@ -183,3 +199,5 @@ let tree2 = new BinarySearchTree(new Node(10,
 
 console.log('isFullBinaryTree', tree.isFullBinaryTree(tree))
 console.log('isPerfectBinaryTree', tree.isPerfectBinaryTree(tree2))
+console.log('isCompleteBinaryTree', tree.isCompleteBinaryTree(tree3, 0))
+console.log('isCompleteBinaryTree', tree.isCompleteBinaryTree(tree4, 0))
