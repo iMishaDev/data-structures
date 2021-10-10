@@ -125,6 +125,32 @@ class BinarySearchTree {
     }
 
 
+    isBalancedBinaryTree(root=this.root){
+        return this.isBalancedBinaryTreeHelper(root) > -1
+    }
+
+
+    isBalancedBinaryTreeHelper(root){
+        if(!root) return 1; 
+
+        const leftHeight  = this.isBalancedBinaryTreeHelper(root.leftChild);
+        const rightHeight  = this.isBalancedBinaryTreeHelper(root.rightChild);
+        if(leftHeight >= 0 && rightHeight >= 0 && Math.abs(leftHeight - rightHeight) <= 1)
+            return Math.max(leftHeight, rightHeight) + 1
+        return -1
+    }
+
+    isBalancedHelper(node=this.root){
+        if(!node)
+            return 0;
+
+        let leftHeight = this.isBalancedHelper(node.leftChild)
+        let rightHeight = this.isBalancedHelper(node.rightChild)
+
+        if(leftHeight >= 0 && rightHeight >= 0 && Math.abs(leftHeight - rightHeight) <= 1)
+            return Math.max(leftHeight, rightHeight) + 1
+        return -1;
+    }
 
     isPerfectBinaryTree(root=this.root){
         return this.#isPerfectBinaryTreeHelper(root, this.#calculateDepth(root), 0);
@@ -163,10 +189,10 @@ class BinarySearchTree {
 let tree = new BinarySearchTree(new Node(10,
                     new Node(5, new Node(4), new Node(8)),
                     new Node(20, new Node(18),new Node(24))));
+
+
 let tree2 = new BinarySearchTree(new Node(10,
-                    new Node(5, 
-                        new Node(4),
-                        new Node(8)),
+                    new Node(5),
                     new Node(20, 
                         new Node(18,
                             new Node(17),
@@ -201,3 +227,8 @@ console.log('isPerfectBinaryTree', tree3.isPerfectBinaryTree())
 
 console.log('isCompleteBinaryTree', tree.isCompleteBinaryTree())
 console.log('isCompleteBinaryTree', tree4.isCompleteBinaryTree())
+
+console.log('isBalancedBinaryTree tree', tree.isBalancedBinaryTree())
+console.log('isBalancedBinaryTree tree2 ', tree2.isBalancedBinaryTree())
+console.log('isBalancedBinaryTree tree3 ', tree3.isBalancedBinaryTree())
+console.log('isBalancedBinaryTree tree4 ', tree4.isBalancedBinaryTree())
