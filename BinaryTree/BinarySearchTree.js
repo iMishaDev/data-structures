@@ -140,17 +140,6 @@ class BinarySearchTree {
         return -1
     }
 
-    isBalancedHelper(node=this.root){
-        if(!node)
-            return 0;
-
-        let leftHeight = this.isBalancedHelper(node.leftChild)
-        let rightHeight = this.isBalancedHelper(node.rightChild)
-
-        if(leftHeight >= 0 && rightHeight >= 0 && Math.abs(leftHeight - rightHeight) <= 1)
-            return Math.max(leftHeight, rightHeight) + 1
-        return -1;
-    }
 
     isPerfectBinaryTree(root=this.root){
         return this.#isPerfectBinaryTreeHelper(root, this.#calculateDepth(root), 0);
