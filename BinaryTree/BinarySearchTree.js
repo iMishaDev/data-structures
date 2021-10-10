@@ -107,33 +107,30 @@ class BinarySearchTree {
      * A full Binary tree is a special type of binary tree in 
      * which every parent node/internal node has either two or no children.
      */
-    isFullBinaryTree(root){
-        if(!root) return true;
-
-        return root 
-        && this.isFullBinaryTree(root.leftChild) 
+    isFullBinaryTree(root=this.root){
+        if(!root.rightChild && !root.leftChild)
+            return true;
+        if(!root.rightChild || !root.leftChild)
+            return false
+        return   this.isFullBinaryTree(root.leftChild) 
         && this.isFullBinaryTree(root.rightChild)
     }
 
 
-    isCompleteBinaryTree(root){
-        if(!root) return [true, 0];
+    isCompleteBinaryTree(root=this.root){
+        if(!root) return [true, 1];
         const [leftBool, leftHeight] = this.isCompleteBinaryTree(root.leftChild);
         const [rightBool, rightHeight] = this.isCompleteBinaryTree(root.rightChild);
-        
         return [leftBool && rightBool && leftHeight >= rightHeight, Math.max(leftHeight, rightHeight) + 1];
     }
 
 
-    isBalancedBinaryTree(root){
-        
-    }
 
-    isPerfectBinaryTree(root){
+    isPerfectBinaryTree(root=this.root){
         return this.#isPerfectBinaryTreeHelper(root, this.#calculateDepth(root), 0);
     }
 
-    #calculateDepth(root){
+    #calculateDepth(root=this.root){
         if(!root) return 0;
         return 1 + this.#calculateDepth(root.leftChild);
     }
@@ -180,8 +177,7 @@ let tree2 = new BinarySearchTree(new Node(10,
 let tree3 = new BinarySearchTree(new Node(10,
                     new Node(5, 
                         new Node(18),
-                        new Node(24)),
-                    new Node(20)));
+                        new Node(24))));
 
 let tree4 = new BinarySearchTree(new Node(10,
                     new Node(5),
@@ -197,7 +193,11 @@ let tree4 = new BinarySearchTree(new Node(10,
 // console.log(tree)
 // console.log('is Valid BST: ' ,tree.validBinarySearchTree(-10000, 10000))
 
-console.log('isFullBinaryTree', tree.isFullBinaryTree(tree))
-console.log('isPerfectBinaryTree', tree.isPerfectBinaryTree(tree2))
-console.log('isCompleteBinaryTree', tree.isCompleteBinaryTree(tree3, 0))
-console.log('isCompleteBinaryTree', tree.isCompleteBinaryTree(tree4, 0))
+console.log('isFullBinaryTree', tree.isFullBinaryTree())
+console.log('isFullBinaryTree', tree3.isFullBinaryTree())
+
+console.log('isPerfectBinaryTree', tree.isPerfectBinaryTree())
+console.log('isPerfectBinaryTree', tree3.isPerfectBinaryTree())
+
+console.log('isCompleteBinaryTree', tree.isCompleteBinaryTree())
+console.log('isCompleteBinaryTree', tree4.isCompleteBinaryTree())
