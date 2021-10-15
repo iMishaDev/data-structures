@@ -15,11 +15,11 @@ class Graph {
         if(!this.adjacent.get(v1)){
             this.addVertex(v1)
             this.adjacent.get(v1).push(v2)
-        } else   this.adjacent.get(v1).push(v2);
+        } else this.adjacent.get(v1).push(v2);
     }
 
     dfs_rec(node){
-        return this.dfs_rec_helper(node, {})
+        return this.dfs_rec_helper(vertex, {})
     }
 
     dfs_rec_helper(vertex, visited){
@@ -38,6 +38,7 @@ class Graph {
                 this.fill_order(neighbor,  payload)
         }
         payload.stack.push(vertex)
+
     }
 
     reverse(){
@@ -54,13 +55,18 @@ class Graph {
 
 
     getStronglyConnectedVertices(){
+        /*
+        why payload ? 
+            because i need a reference of the stack so i can use it later in dfs. 
+            and the only way to have an actual reference in javascript is by using objects.
+        */
         let payload = {stack: [], visited:{}}
 
-        for (const v of this.adjacent){
-            if(!payload.visited[v[0]])
-                this.fill_order(v[0], payload)
+        for (const vertex of this.adjacent){
+            if(!payload.visited[vertex[0]])
+                this.fill_order(vertex[0], payload)
         }
-            
+
 
         let reversedGraph = this.reverse()
         let visited = {}
