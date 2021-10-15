@@ -16,7 +16,7 @@ class RedBlackTree {
 
     insert(node){
         if(!this.root){
-            this.root = new RedBlackNode(1, node, null, null, null);
+            this.root = new RedBlackNode(0, node, null, null, null);
             return;
         }
         return this.insertHelper(node, this.root);
@@ -162,7 +162,7 @@ tree.insert(60)
 tree.insert(75)
 tree.insert(57)
 tree.inorder()
-console.log(tree.root.rightChild)
+console.log(tree.root)
 
 /**
  * ref: https://www.programiz.com/dsa/red-black-tree
