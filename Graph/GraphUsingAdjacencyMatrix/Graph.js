@@ -5,11 +5,15 @@ class Graph {
     }
 
     addEdge(v1, v2){
+        if(v1 == v2)
+            return 'cannot add edge for the same node'
         this.matrix[v1][v2] = 1;
         this.matrix[v2][v1] = 1;
     }
 
     removeEdge(v1, v2){
+        if(this.matrix[v1][v2] === 0)
+            return 'nothing to remove'
         this.matrix[v1][v2] = 0;
         this.matrix[v2][v1] = 0;
     }
